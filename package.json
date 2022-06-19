@@ -1,5 +1,5 @@
 {
-  "name": "solana-localnet-nfts",
+  "name": "anchor-localnet-nfts",
   "version": "0.1.0",
   "private": true,
   "scripts": {
