@@ -80,7 +80,7 @@ const Home: NextPage = () => {
             marginBottom: ".8rem",
           }}
         >
-          Localnet NFTs config generator
+          Anchor config for NFTs on localnet
         </Heading>
 
         <Text
@@ -89,7 +89,7 @@ const Home: NextPage = () => {
           }}
         >
           Paste your address below and get all Anchor.toml config necessary to
-          work on Localnet using your wallet NFTs!
+          use your NFTs on Localnet!
         </Text>
 
         <form
