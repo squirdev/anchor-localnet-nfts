@@ -1,19 +1,40 @@
+import { clusterApiUrl, Connection, PublicKey } from "@solana/web3.js"
 import type { NextPage } from "next"
 import Head from "next/head"
 import Image from "next/image"
-import { FormEvent } from "react"
+import { FormEvent, useRef, useState } from "react"
 import styles from "../styles/Home.module.css"
+import { getNFTsByOwner, NFT } from "../utils/nfts"
 
 const Home: NextPage = () => {
-  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const [NFTs, setNFTs] = useState<NFT[] | null>(null)
 
-    console.log(";dasdoifjd")
+  const inputRef = useRef<HTMLInputElement>(null)
+  const selectRef = useRef<HTMLSelectElement>(null)
+  const codeRef = useRef<HTMLElement>(null)
+
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
 
     const formData = new FormData(e.currentTarget)
 
-    console.log(formData.get("address"))
+    const inputValue = formData.get("address")
+    const selectValue = formData.get("network")
+
+    if (!inputValue || !selectValue) {
+      throw new Error("Invalid inputs.")
+    }
+
+    const addr = new PublicKey(inputValue)
+
+    const connection = new Connection(
+      clusterApiUrl(selectValue === "devnet" ? "devnet" : "mainnet-beta")
+    )
+
+    const fetchedNFTs = await getNFTsByOwner(addr, connection)
+    setNFTs(fetchedNFTs)
   }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -49,20 +70,66 @@ const Home: NextPage = () => {
         <form onSubmit={handleFormSubmit}>
           <label>
             Wallet address:
-            <input
-              name="address"
-              value="FhHV2jmbPw4guEGhkDfFJiYLeUcMzTmYr6GPk9TuKTE"
-            />
+            <input ref={inputRef} name="address" />
           </label>
           <label>
             Network:
-            <select>
-              <option value="1">Mainnet</option>
-              <option value="2">Devnet</option>
+            <select name="network" ref={selectRef} defaultValue="devnet">
+              <option value="mainnet-beta">Mainnet</option>
+              <option value="devnet">Devnet</option>
             </select>
           </label>
           <button type="submit">Generate Anchor.toml!</button>
         </form>
+        <button
+          onClick={() => {
+            if (codeRef.current) {
+              navigator.clipboard.writeText(codeRef.current?.innerText)
+            }
+          }}
+        >
+          copy
+        </button>
+        <code ref={codeRef} lang="toml">
+          # Necessary for test validator <br />
+          [test.validator]
+          <br />
+          url = "https://api.devnet.solana.com"
+          <br />
+          <br />
+          [test]
+          <br />
+          startup_wait = 20000
+          <br />
+          <br />
+          ### Cloning Accounts from address {inputRef.current?.value} on{" "}
+          {selectRef.current?.value}
+          {NFTs &&
+            NFTs.map((nft, index) => {
+              return (
+                <>
+                  <br /># NFT #{index} Mint address (
+                  {nft.onchainMetadata.data.name})
+                  <br />
+                  [[test.validator.clone]]
+                  <br />
+                  address = "{nft.mint.toString()}"
+                  <br /># User NFT #{index} Associated Token Account address
+                  <br />
+                  [[test.validator.clone]]
+                  <br />
+                  address = "{nft.pubkey?.toString()}"
+                  <br /># NFT #{index} Metadata Program Derived address
+                  <br />
+                  [[test.validator.clone]]
+                  <br />
+                  address = "{nft.metadataPDA.toString()}"
+                  <br />
+                  <br />
+                </>
+              )
+            })}
+        </code>
       </main>
 
       <footer className={styles.footer}>
