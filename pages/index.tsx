@@ -1,9 +1,19 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import type { NextPage } from "next"
+import Head from "next/head"
+import Image from "next/image"
+import { FormEvent } from "react"
+import styles from "../styles/Home.module.css"
 
 const Home: NextPage = () => {
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    console.log(";dasdoifjd")
+
+    const formData = new FormData(e.currentTarget)
+
+    console.log(formData.get("address"))
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -13,44 +23,46 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
+        <h1 className={styles.title}>Localnet NFTs config generator</h1>
         <p className={styles.description}>
-          Get started by editing{' '}
+          Get started by entering a wallet address:{" "}
           <code className={styles.code}>pages/index.tsx</code>
         </p>
-
+        Why?
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          <ul>
+            <li>
+              Working on Localnet is 100x faster, but you always need to clone
+              the accounts to the validator
+            </li>
+            <li>
+              {" "}
+              This app will clone all accounts from a wallet address, and parse
+              into toml format.
+            </li>
+            <li>
+              All you need to do is to copy the lines and paste into your
+              Anchor.toml file
+            </li>
+          </ul>
         </div>
+        <form onSubmit={handleFormSubmit}>
+          <label>
+            Wallet address:
+            <input
+              name="address"
+              value="FhHV2jmbPw4guEGhkDfFJiYLeUcMzTmYr6GPk9TuKTE"
+            />
+          </label>
+          <label>
+            Network:
+            <select>
+              <option value="1">Mainnet</option>
+              <option value="2">Devnet</option>
+            </select>
+          </label>
+          <button type="submit">Generate Anchor.toml!</button>
+        </form>
       </main>
 
       <footer className={styles.footer}>
@@ -59,7 +71,7 @@ const Home: NextPage = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
