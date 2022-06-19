@@ -56,7 +56,10 @@ const Home: NextPage = () => {
     <div>
       <Head>
         <title>Localnet NFT Cloner</title>
-        <meta name="description" content="Clone NFTs from devnet to localnet" />
+        <meta
+          name="description"
+          content="Clone NFTs from devnet/mainnet to localnet"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
