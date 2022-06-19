@@ -204,7 +204,28 @@ const Home: NextPage = () => {
               startup_wait = 20000
               <br />
               <br />
-              ### Cloning Accounts from address{" "}
+              ## Cloning main programs
+              <br />
+              # Token program
+              <br />
+              [[test.validator.clone]]
+              <br />
+              address = "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+              <br />
+              # Associated Token program
+              <br />
+              [[test.validator.clone]]
+              <br />
+              address = "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+              <br />
+              # Token Metadata program
+              <br />
+              [[test.validator.clone]]
+              <br />
+              address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+              <br />
+              <br />
+              ### Cloning NFT-related Accounts from address{" "}
               {inputRef.current?.value.slice(0, 5)}... on{" "}
               {selectRef.current?.value}
               <br />
