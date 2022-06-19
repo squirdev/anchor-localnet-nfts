@@ -91,7 +91,6 @@ const Home: NextPage = () => {
           Paste your address below and get all Anchor.toml config necessary to
           use your NFTs on Localnet!
         </Text>
-
         <form
           sx={{
             gap: "1.6rem",
@@ -210,19 +209,19 @@ const Home: NextPage = () => {
               <br />
               [[test.validator.clone]]
               <br />
-              address = "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+              address = &quot;TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA&quot;
               <br />
               # Associated Token program
               <br />
               [[test.validator.clone]]
               <br />
-              address = "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+              address = &quot;ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL&quot;
               <br />
               # Token Metadata program
               <br />
               [[test.validator.clone]]
               <br />
-              address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+              address = &quot;metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s&quot;
               <br />
               <br />
               ### Cloning NFT-related Accounts from address{" "}
