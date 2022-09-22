@@ -126,7 +126,7 @@ const Home: NextPage = () => {
               flexDirection: "column",
             }}
           >
-            Clone Accounts from:
+            Clone Accounts from: &nbsp;
             <Select
               sx={{
                 minWidth: "24rem",
