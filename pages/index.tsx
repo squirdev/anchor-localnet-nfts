@@ -133,7 +133,7 @@ const Home: NextPage = () => {
               }}
               name="network"
               ref={selectRef}
-              defaultValue="devnet"
+              defaultValue="mainnet-beta"
             >
               <option value="mainnet-beta">Mainnet</option>
               <option value="devnet">Devnet</option>
