@@ -39,7 +39,9 @@ const Home: NextPage = () => {
       const addr = new PublicKey(inputValue)
 
       const connection = new Connection(
-        clusterApiUrl(selectValue === "devnet" ? "devnet" : "mainnet-beta")
+        selectValue === "devnet"
+          ? clusterApiUrl("devnet")
+          : "https://green-restless-river.solana-mainnet.quiknode.pro/d0edf84e7c18f7ec6c5372c22bac6e765822927f/"
       )
 
       setFeedbackStatus("Fetching...")
