@@ -197,7 +197,10 @@ const Home: NextPage = () => {
               ## Necessary for test validator <br />
               [test.validator]
               <br />
-              url = &quot;https://api.{selectRef.current?.value}
+              url = &quot;
+              {selectRef.current?.value === "devnet"
+                ? `https://api.${selectRef.current?.value}`
+                : `https://ssc-dao.genesysgo.net`}
               .solana.com&quot;
               <br />
               [test]
