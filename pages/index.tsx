@@ -199,9 +199,8 @@ const Home: NextPage = () => {
               <br />
               url = &quot;
               {selectRef.current?.value === "devnet"
-                ? `https://api.${selectRef.current?.value}`
+                ? `https://api.${selectRef.current?.value}.solana.com`
                 : `https://ssc-dao.genesysgo.net`}
-              .solana.com&quot;
               <br />
               [test]
               <br />
